@@ -157,6 +157,15 @@ public class Agregarform extends javax.swing.JFrame {
         if (MenuTeam.posVacia()>=0){
             btagregar.setEnabled(true);
         }
+        
+        //DISPONIBILIDAD...Esta bueno esto?
+        
+        int num = Integer.parseInt(txtDorsal.getText());
+        MenuTeam ob = new MenuTeam();
+        ob.buscar(num);
+        txtdNombre.setText(ob.buscar(num).nombre);
+        txtdSalario.setText(""+ob.buscar(num).salario);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btagregarActionPerformed
