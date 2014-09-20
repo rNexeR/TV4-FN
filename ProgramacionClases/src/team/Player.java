@@ -23,5 +23,7 @@ public class Player {
         dispo = true;
     }
     
-    
+    public void changeDispo(){
+        dispo=!dispo;
+    }
 }

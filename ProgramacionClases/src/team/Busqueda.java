@@ -8,13 +8,14 @@ package team;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static team.MenuTeam.players;
 
 /**
  *
  * @author KELVIN
  */
 public class Busqueda extends javax.swing.JFrame {
-
+    DefaultTableModel filtrar;
     /**
      * Creates new form Busqueda
      */
@@ -23,6 +24,7 @@ public class Busqueda extends javax.swing.JFrame {
         if (MenuTeam.dm!=null){
             jTable1.setModel(MenuTeam.dm);
         }
+        filtrar = (DefaultTableModel)jTable1.getModel();
     }
 
     /**
@@ -40,7 +42,7 @@ public class Busqueda extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("SALARIO: ");
 
@@ -126,17 +128,22 @@ public class Busqueda extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        jTable1.setModel(MenuTeam.dm);
-        DefaultTableModel filtrar = (DefaultTableModel)jTable1.getModel();
-        JOptionPane.showMessageDialog(this, jTable1.getRowCount());
-        int salario = Integer.parseInt(txtsalario.getText());
-        for (int i = 0; i < jTable1.getRowCount(); i++) {
-            if (((Integer)jTable1.getValueAt(i, 3)).intValue()<salario){
-                filtrar.removeRow(i);
-            }
+        int count = jTable1.getModel().getRowCount();
+        for (int i = 0; i < count; i++) {
+            filtrar.removeRow(0);
         }
+        filtrar(Double.parseDouble(txtsalario.getText()));
+        jTable1.setModel(filtrar);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void filtrar(double sal){
+        for (Player p : players){
+            if (p!=null && p.salario>=sal){
+                Object[] dato = {p.dorsal, p.nombre, p.salario, p.dispo};
+                filtrar.addRow(dato);
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */

@@ -19,9 +19,9 @@ public class Agregarform extends javax.swing.JFrame {
      */
     public Agregarform() {
         initComponents();
-        if (MenuTeam.dm!=null){
-            jTable1.setModel(MenuTeam.dm);
-        }
+        MenuTeam.dm =(DefaultTableModel)this.jTable1.getModel();
+        MenuTeam.update();
+        jTable1.setModel(MenuTeam.dm);
         
     }
 
@@ -171,6 +171,10 @@ public class Agregarform extends javax.swing.JFrame {
         
         MenuTeam.dm =(DefaultTableModel)this.jTable1.getModel();
         MenuTeam.dm.addRow(MenuTeam.agregar(nd, n, sal));
+        btagregar.setEnabled(false);
+        txtdorsal.setText("");
+        txtnombre.setText("");
+        txtsalario.setText("");
     }//GEN-LAST:event_btagregarActionPerformed
 
     /**

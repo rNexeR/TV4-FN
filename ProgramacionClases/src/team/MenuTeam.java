@@ -26,7 +26,7 @@ public class MenuTeam extends javax.swing.JFrame {
         return -1;
     }
     
-    public Player buscar(int dor){
+    public static Player buscar(int dor){
         for (Player p : players){
             if (p!=null && p.dorsal==dor)
                 return p;
@@ -40,6 +40,24 @@ public class MenuTeam extends javax.swing.JFrame {
         Object dato[] = {dor, n, sal, true};
         return dato;
     }
+    
+    public static void changeEstado(int dor){
+        for (Player p : players){
+            if (p!=null && p.dorsal==dor)
+                p.changeDispo();
+        }
+    }
+    
+    public static void update(){
+        for (Player p : players){
+            if (p!=null){
+                Object[] dato = {p.dorsal, p.nombre, p.salario, p.dispo};
+                dm.addRow(dato);
+            }
+        }
+    }
+    
+    
     /**
      * Creates new form MenuTeam
      */
@@ -70,6 +88,11 @@ public class MenuTeam extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cambiar Estado");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Busqueda");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -114,6 +137,11 @@ public class MenuTeam extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Busqueda().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new Lesionado().setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
