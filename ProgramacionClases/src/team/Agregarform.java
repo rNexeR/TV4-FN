@@ -13,12 +13,16 @@ import javax.swing.table.DefaultTableModel;
  * @author KELVIN
  */
 public class Agregarform extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form Agregarform
      */
     public Agregarform() {
         initComponents();
+        MenuTeam.dm =(DefaultTableModel)this.jTable1.getModel();
+        MenuTeam.update();
+        jTable1.setModel(MenuTeam.dm);
+        
     }
 
     /**
@@ -165,8 +169,12 @@ public class Agregarform extends javax.swing.JFrame {
         String n = txtnombre.getText();
         double sal = Double.parseDouble(txtsalario.getText());
         
-        DefaultTableModel dm =(DefaultTableModel)this.jTable1.getModel();
-        dm.addRow(MenuTeam.agregar(nd, n, sal));
+        MenuTeam.dm =(DefaultTableModel)this.jTable1.getModel();
+        MenuTeam.dm.addRow(MenuTeam.agregar(nd, n, sal));
+        btagregar.setEnabled(false);
+        txtdorsal.setText("");
+        txtnombre.setText("");
+        txtsalario.setText("");
     }//GEN-LAST:event_btagregarActionPerformed
 
     /**
@@ -212,7 +220,7 @@ public class Agregarform extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private static javax.swing.JTable jTable1;
     private javax.swing.JTextField txtdorsal;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txtsalario;
